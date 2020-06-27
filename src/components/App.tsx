@@ -1,14 +1,13 @@
 import React from "react";
 
-export interface HelloProps {
-  compiler: string;
-  framework: string;
-}
+import Profile from "./Profile";
+import LoginButton from "./LoginButton";
+import LogoutButton from "./LogoutButton";
 
-export const App = (props: HelloProps) => (
+export const App = () => (
   <div>
-    <h1>
-      Hello from {props.compiler} and {props.framework}!
-    </h1>
+    <Profile></Profile>
+    <LoginButton></LoginButton>
+    <LogoutButton></LogoutButton>
   </div>
 );

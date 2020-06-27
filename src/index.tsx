@@ -10,7 +10,7 @@ ReactDOM.render(
     clientId="9y8ASx6sqghDBQEN8d9x4AwT7qvbsjra"
     redirectUri={window.location.origin}
   >
-    <App compiler="TypeScript" framework="React"></App>,
+    <App></App>
   </Auth0Provider>,
   document.getElementById("root")
 );
