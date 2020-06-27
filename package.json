@@ -1,0 +1,11 @@
+{
+  "name": "twittear",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "pione30 <g.pionelish30@gmail.com>",
+  "license": "UNLICENSED",
+  "private": true
+}
