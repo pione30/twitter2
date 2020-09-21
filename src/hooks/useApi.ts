@@ -27,7 +27,7 @@ export const useApi = (url: string, options: UseApiOptions = {}) => {
       try {
         const { audience, scope, fetchOptions } = options;
         const accessToken = await getAccessTokenSilently({ audience, scope });
-        const res = await fetch(url, {
+        const response = await fetch(url, {
           ...fetchOptions,
           headers: {
             ...fetchOptions?.headers,
@@ -35,9 +35,21 @@ export const useApi = (url: string, options: UseApiOptions = {}) => {
             Authorization: `Bearer ${accessToken}`,
           },
         });
+
+        if (!response.ok) {
+          setState({
+            ...state,
+            error: {
+              message: `HTTP error! status: ${response.status}`,
+            },
+            loading: false,
+          });
+          return;
+        }
+
         setState({
           ...state,
-          data: await res.json(),
+          data: await response.json(),
           error: null,
           loading: false,
         });
