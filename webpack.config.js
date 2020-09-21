@@ -31,6 +31,9 @@ module.exports = {
 
   resolve: {
     extensions: [".ts", ".tsx", ".wasm", ".mjs", ".js", ".json"],
+    alias: {
+      "@": path.resolve(__dirname, "src"),
+    },
   },
 
   plugins: [
