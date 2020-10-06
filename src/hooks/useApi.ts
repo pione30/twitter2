@@ -31,6 +31,7 @@ export const useApi = (url: string, options: UseApiOptions = {}) => {
           ...fetchOptions,
           headers: {
             ...fetchOptions?.headers,
+            Accept: "application/json",
             // Add the Authorization header to the existing headers
             Authorization: `Bearer ${accessToken}`,
           },
