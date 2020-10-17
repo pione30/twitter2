@@ -62,7 +62,7 @@ export const useApi = (url: string, options: UseApiOptions = {}) => {
         });
       }
     })();
-  }, [refreshIndex]);
+  }, [getAccessTokenSilently, refreshIndex]);
 
   return {
     ...state,
