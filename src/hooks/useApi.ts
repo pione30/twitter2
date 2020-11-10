@@ -8,16 +8,14 @@ export type UseApiOptions = {
 };
 
 type ApiStates = {
-  data: null | any;
-  error: null | any;
+  data?: any;
+  error?: any;
   loading: boolean;
 };
 
 export const useApi = (url: string, options: UseApiOptions = {}) => {
   const { getAccessTokenSilently } = useAuth0();
   const [state, setState] = useState<ApiStates>({
-    data: null,
-    error: null,
     loading: true,
   });
   const [refreshIndex, setRefreshIndex] = useState(0);
@@ -50,7 +48,8 @@ export const useApi = (url: string, options: UseApiOptions = {}) => {
 
         setState({
           ...state,
-          data: await response.json(),
+          // ignore 204 No Content
+          data: response.status !== 204 && (await response.json()),
           error: null,
           loading: false,
         });
