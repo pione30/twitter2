@@ -48,7 +48,8 @@ export const useApi = (url: string, options: UseApiOptions = {}) => {
 
         setState({
           ...state,
-          data: await response.json(),
+          // ignore 204 No Content
+          data: response.status !== 204 && (await response.json()),
           error: null,
           loading: false,
         });
