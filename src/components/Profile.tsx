@@ -1,7 +1,6 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useApi } from "@/hooks/useApi";
-import type { UseApiOptions } from "@/hooks/useApi"; // eslint-disable-line no-unused-vars
+import { useApi, UseApiOptions } from "@/hooks/useApi"; // eslint-disable-line no-unused-vars
 import { getAuth0Audience } from "@/environmentVariables";
 import LoginButton from "./LoginButton";
 
