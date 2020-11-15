@@ -2,7 +2,7 @@ import React from "react";
 
 import { useAuth0 } from "@auth0/auth0-react";
 
-import Profile from "./Profile";
+import Posts from "./Posts";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
 
@@ -13,7 +13,7 @@ export const App = () => {
     <div>
       {isAuthenticated ? (
         <>
-          <Profile></Profile>
+          <Posts></Posts>
           <LogoutButton></LogoutButton>
         </>
       ) : (
