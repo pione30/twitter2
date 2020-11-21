@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack serve --mode development --devtool eval-source-map --port 3000",
+    "dev": "webpack serve --mode development --devtool eval-source-map",
     "build": "webpack --mode production --devtool source-map",
     "typecheck": "tsc -p . --noEmit",
     "lint:prettier": "prettier --check src",
