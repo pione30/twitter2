@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --mode 'development' --devtool 'eval-source-map' --port 3000",
-    "build": "webpack --mode 'production' --devtool 'source-map'",
+    "dev": "webpack serve --mode development --devtool eval-source-map --port 3000",
+    "build": "webpack --mode production --devtool source-map",
     "typecheck": "tsc -p . --noEmit",
     "lint:prettier": "prettier --check src",
     "fix:prettier": "prettier --write src",
