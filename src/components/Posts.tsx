@@ -1,6 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useApi, UseApiOptions } from "@/hooks/useApi"; // eslint-disable-line no-unused-vars
 import { formatDate } from "@/helpers";
+import { getAuth0Audience } from "@/environmentVariables";
 import LoginButton from "./LoginButton";
 
 interface Post {
@@ -10,18 +11,19 @@ interface Post {
 }
 
 const Posts = () => {
-  const apiOpts: UseApiOptions = {
+  const { user, isAuthenticated, getAccessTokenWithPopup } = useAuth0();
+
+  const useApiOptions: UseApiOptions = {
+    audience: getAuth0Audience(),
     scope: "read:users read:posts",
   };
-
-  const { user, isAuthenticated, getAccessTokenWithPopup } = useAuth0();
   const { data: myPosts, loading, error, refresh } = useApi(
     `/posts/own`,
-    apiOpts
+    useApiOptions
   );
 
   const getTokenAndTryAgain = async () => {
-    await getAccessTokenWithPopup(apiOpts);
+    await getAccessTokenWithPopup(useApiOptions);
     refresh();
   };
 
