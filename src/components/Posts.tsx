@@ -13,7 +13,7 @@ interface Post {
 const Posts = () => {
   const apiOpts: UseApiOptions = {
     audience: getAuth0Audience(),
-    scope: "read:current_user read:posts",
+    scope: "read:users read:posts",
   };
 
   const { user, isAuthenticated, getAccessTokenWithPopup } = useAuth0();
