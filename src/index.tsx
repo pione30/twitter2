@@ -14,7 +14,7 @@ ReactDOM.render(
     clientId={getAuth0ClientId()}
     redirectUri={window.location.origin}
     audience={getAuth0Audience()}
-    scope="read:current_user read:posts"
+    scope="read:users read:posts write:users write:posts"
   >
     <App></App>
   </Auth0Provider>,
