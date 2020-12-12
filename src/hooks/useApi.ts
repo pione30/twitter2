@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { getAuth0Audience, getApiRootEndpoint } from "@/environmentVariables";
 
 export type UseApiOptions = {
   audience?: string;
@@ -8,12 +9,15 @@ export type UseApiOptions = {
 };
 
 type ApiStates = {
-  data?: any;
-  error?: any;
+  data?: unknown;
+  error?: {
+    message?: string;
+    error?: "login_required" | "consent_required";
+  };
   loading: boolean;
 };
 
-export const useApi = (url: string, options: UseApiOptions = {}) => {
+export const useApi = (path: string, options: UseApiOptions = {}) => {
   const { getAccessTokenSilently } = useAuth0();
   const [state, setState] = useState<ApiStates>({
     loading: true,
@@ -23,9 +27,9 @@ export const useApi = (url: string, options: UseApiOptions = {}) => {
   useEffect(() => {
     (async () => {
       try {
-        const { audience, scope, fetchOptions } = options;
+        const { audience = getAuth0Audience(), scope, fetchOptions } = options;
         const accessToken = await getAccessTokenSilently({ audience, scope });
-        const response = await fetch(url, {
+        const response = await fetch(`${getApiRootEndpoint()}${path}`, {
           ...fetchOptions,
           headers: {
             ...fetchOptions?.headers,
@@ -50,7 +54,6 @@ export const useApi = (url: string, options: UseApiOptions = {}) => {
           ...state,
           // ignore 204 No Content
           data: response.status !== 204 && (await response.json()),
-          error: null,
           loading: false,
         });
       } catch (error) {

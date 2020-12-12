@@ -11,19 +11,19 @@ interface Post {
 }
 
 const Posts = () => {
-  const apiOpts: UseApiOptions = {
+  const { user, isAuthenticated, getAccessTokenWithPopup } = useAuth0();
+
+  const useApiOptions: UseApiOptions = {
     audience: getAuth0Audience(),
     scope: "read:users read:posts",
   };
-
-  const { user, isAuthenticated, getAccessTokenWithPopup } = useAuth0();
   const { data: myPosts, loading, error, refresh } = useApi(
-    `${getAuth0Audience()}/posts/own`,
-    apiOpts
+    `/posts/own`,
+    useApiOptions
   );
 
   const getTokenAndTryAgain = async () => {
-    await getAccessTokenWithPopup(apiOpts);
+    await getAccessTokenWithPopup(useApiOptions);
     refresh();
   };
 
