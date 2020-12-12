@@ -9,7 +9,7 @@ export type UseApiOptions = {
 };
 
 type ApiStates = {
-  data?: any;
+  data?: unknown;
   error?: {
     message?: string;
     error?: "login_required" | "consent_required";
