@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { getAuth0Audience } from "@/environmentVariables";
 
 export type UseApiOptions = {
   audience?: string;
@@ -23,7 +24,7 @@ export const useApi = (url: string, options: UseApiOptions = {}) => {
   useEffect(() => {
     (async () => {
       try {
-        const { audience, scope, fetchOptions } = options;
+        const { audience = getAuth0Audience(), scope, fetchOptions } = options;
         const accessToken = await getAccessTokenSilently({ audience, scope });
         const response = await fetch(url, {
           ...fetchOptions,

@@ -1,7 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useApi, UseApiOptions } from "@/hooks/useApi"; // eslint-disable-line no-unused-vars
 import { formatDate } from "@/helpers";
-import { getAuth0Audience } from "@/environmentVariables";
 import LoginButton from "./LoginButton";
 
 interface Post {
@@ -12,7 +11,6 @@ interface Post {
 
 const Posts = () => {
   const apiOpts: UseApiOptions = {
-    audience: getAuth0Audience(),
     scope: "read:users read:posts",
   };
 
