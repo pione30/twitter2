@@ -10,7 +10,10 @@ export type UseApiOptions = {
 
 type ApiStates = {
   data?: any;
-  error?: any;
+  error?: {
+    message?: string;
+    error?: "login_required" | "consent_required";
+  };
   loading: boolean;
 };
 
@@ -51,7 +54,6 @@ export const useApi = (path: string, options: UseApiOptions = {}) => {
           ...state,
           // ignore 204 No Content
           data: response.status !== 204 && (await response.json()),
-          error: null,
           loading: false,
         });
       } catch (error) {
