@@ -16,7 +16,7 @@ const Posts = () => {
 
   const { user, isAuthenticated, getAccessTokenWithPopup } = useAuth0();
   const { data: myPosts, loading, error, refresh } = useApi(
-    `${getAuth0Audience()}/posts/own`,
+    `/posts/own`,
     apiOpts
   );
 

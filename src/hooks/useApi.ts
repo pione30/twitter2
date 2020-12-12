@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { getAuth0Audience } from "@/environmentVariables";
+import { getAuth0Audience, getApiRootEndpoint } from "@/environmentVariables";
 
 export type UseApiOptions = {
   audience?: string;
@@ -14,7 +14,7 @@ type ApiStates = {
   loading: boolean;
 };
 
-export const useApi = (url: string, options: UseApiOptions = {}) => {
+export const useApi = (path: string, options: UseApiOptions = {}) => {
   const { getAccessTokenSilently } = useAuth0();
   const [state, setState] = useState<ApiStates>({
     loading: true,
@@ -26,7 +26,7 @@ export const useApi = (url: string, options: UseApiOptions = {}) => {
       try {
         const { audience = getAuth0Audience(), scope, fetchOptions } = options;
         const accessToken = await getAccessTokenSilently({ audience, scope });
-        const response = await fetch(url, {
+        const response = await fetch(`${getApiRootEndpoint()}${path}`, {
           ...fetchOptions,
           headers: {
             ...fetchOptions?.headers,
