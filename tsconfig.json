@@ -7,7 +7,7 @@
       "DOM",
       "ES2020"
     ],
-    "jsx": "react",
+    "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
