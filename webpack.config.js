@@ -56,6 +56,9 @@ module.exports = {
       "process.env.AUTH0_AUDIENCE": JSON.stringify(
         process.env.AUTH0_AUDIENCE || devConfig.AUTH0_AUDIENCE
       ),
+      "process.env.API_ROOT_ENDPOINT": JSON.stringify(
+        process.env.API_ROOT_ENDPOINT || devConfig.API_ROOT_ENDPOINT
+      ),
     }),
   ],
 };

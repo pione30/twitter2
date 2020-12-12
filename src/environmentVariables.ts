@@ -21,3 +21,11 @@ export const getAuth0Audience = (): string => {
     throw new Error("process.env.AUTH0_AUDIENCE is not defined");
   }
 };
+
+export const getApiRootEndpoint = (): string => {
+  if (process.env.API_ROOT_ENDPOINT) {
+    return process.env.API_ROOT_ENDPOINT;
+  } else {
+    throw new Error("process.env.API_ROOT_ENDPOINT is not defined");
+  }
+};
