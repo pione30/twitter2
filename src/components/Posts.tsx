@@ -14,7 +14,6 @@ const Posts = () => {
   const { user } = useAuth0();
 
   const useApiOptions = {
-    audience: getAuth0Audience(),
     scope: "read:users read:posts",
   };
   const { data: myPosts, loading, error, refresh } = useApi(
