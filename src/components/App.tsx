@@ -1,8 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
-
-import Posts from "./Posts";
 import LoginButton from "./LoginButton";
-import LogoutButton from "./LogoutButton";
+import { LoginWithRedirectCallback } from "./LoginWithRedirectCallback";
 
 export const App = () => {
   const { isAuthenticated } = useAuth0();
@@ -10,10 +8,7 @@ export const App = () => {
   return (
     <div>
       {isAuthenticated ? (
-        <>
-          <Posts></Posts>
-          <LogoutButton></LogoutButton>
-        </>
+        <LoginWithRedirectCallback></LoginWithRedirectCallback>
       ) : (
         <LoginButton></LoginButton>
       )}
