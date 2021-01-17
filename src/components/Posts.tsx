@@ -1,8 +1,8 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { useApi, UseApiOptions } from "@/hooks/useApi"; // eslint-disable-line no-unused-vars
+import { useApi } from "@/hooks/useApi";
 import { formatDate } from "@/helpers";
 import { getAuth0Audience } from "@/environmentVariables";
-import LoginButton from "./LoginButton";
+import { ApiResultHandler } from "@/components/helpers/ApiResultHandler";
 
 interface Post {
   id: string;
@@ -11,9 +11,9 @@ interface Post {
 }
 
 const Posts = () => {
-  const { user, isAuthenticated, getAccessTokenWithPopup } = useAuth0();
+  const { user } = useAuth0();
 
-  const useApiOptions: UseApiOptions = {
+  const useApiOptions = {
     audience: getAuth0Audience(),
     scope: "read:users read:posts",
   };
@@ -22,48 +22,29 @@ const Posts = () => {
     useApiOptions
   );
 
-  const getTokenAndTryAgain = async () => {
-    await getAccessTokenWithPopup(useApiOptions);
-    refresh();
-  };
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-  if (error) {
-    if (error.error === "login_required") {
-      return <LoginButton></LoginButton>;
-    }
-    if (error.error === "consent_required") {
-      return (
-        <button onClick={getTokenAndTryAgain}>
-          Consent to reading current user and posts
-        </button>
-      );
-    }
-    return <div>Oops {error.message}</div>;
-  }
-
   return (
-    <>
-      {isAuthenticated && (
+    <ApiResultHandler
+      loading={loading}
+      error={error}
+      refresh={refresh}
+      scope={useApiOptions.scope}
+    >
+      <div>
+        <img src={user.picture} alt={user.name} />
+        <h2>{user.name}</h2>
         <div>
-          <img src={user.picture} alt={user.name} />
-          <h2>{user.name}</h2>
-          <div>
-            Your posts:
-            <ul>
-              {(myPosts as Array<Post>).map((post) => (
-                <li key={post.id}>
-                  {post.body}
-                  <p>({formatDate(post.created_at)})</p>
-                </li>
-              ))}
-            </ul>
-          </div>
+          Your posts:
+          <ul>
+            {(myPosts as Array<Post> | undefined)?.map((post) => (
+              <li key={post.id}>
+                {post.body}
+                <p>({formatDate(post.created_at)})</p>
+              </li>
+            ))}
+          </ul>
         </div>
-      )}
-    </>
+      </div>
+    </ApiResultHandler>
   );
 };
 
