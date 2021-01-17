@@ -8,7 +8,7 @@ export type UseApiOptions = {
   fetchOptions?: RequestInit;
 };
 
-type ApiStates = {
+export type ApiStates = {
   data?: unknown;
   error?: {
     message?: string;
