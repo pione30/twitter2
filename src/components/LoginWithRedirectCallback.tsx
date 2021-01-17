@@ -7,7 +7,7 @@ export const LoginWithRedirectCallback = () => {
   const apiOptions = {
     scope: "write:users",
     fetchOptions: {
-      method: "POST",
+      method: "PUT",
     },
   };
 
